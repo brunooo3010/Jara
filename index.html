@@ -2,56 +2,196 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday My Best Friend Ever <3 🎂</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ✨</title>
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
 body{
-  margin:0;
-  height:100vh;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(180deg,#FCE7F3,#FFF7ED);
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#ffd6e7,#fff3c7);
-  font-family:Arial,sans-serif;
+  overflow:hidden;
 }
+
 .card{
-  background:white;
-  width:330px;
-  padding:30px;
-  border-radius:24px;
+  width:360px;
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(14px);
+  border-radius:28px;
+  padding:28px;
   text-align:center;
-  box-shadow:0 15px 35px rgba(0,0,0,.12);
+  box-shadow:0 10px 40px rgba(0,0,0,.12);
 }
+
+h1{
+  color:#ec4899;
+  font-size:30px;
+}
+
+.sub{
+  color:#64748b;
+  margin:8px 0 22px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.item{
+  background:white;
+  border-radius:18px;
+  padding:18px 10px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.item:hover{
+  transform:translateY(-4px) scale(1.03);
+}
+
+.emoji{font-size:38px}
+.item p{margin-top:8px;font-size:14px}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.popup{
+  background:white;
+  width:340px;
+  border-radius:24px;
+  padding:24px;
+  animation:pop .3s;
+}
+
+@keyframes pop{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.popup h2{
+  color:#ec4899;
+  margin-bottom:12px;
+}
+
+.popup p{
+  color:#475569;
+  line-height:1.8;
+  white-space:pre-line;
+}
+
 button{
-  margin-top:18px;
+  margin-top:20px;
+  width:100%;
   border:none;
-  background:#ff6fa5;
+  background:#f472b6;
   color:white;
-  padding:12px 20px;
+  padding:12px;
   border-radius:999px;
   cursor:pointer;
 }
-h1{color:#ff4d88}
+
+.star{
+  position:absolute;
+  font-size:18px;
+  animation:float 6s linear infinite;
+  opacity:.7;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh)}
+  to{transform:translateY(-120px)}
+}
 </style>
 </head>
 <body>
 
+<div class="star" style="left:10%;animation-delay:0s">✨</div>
+<div class="star" style="left:30%;animation-delay:2s">🌸</div>
+<div class="star" style="left:70%;animation-delay:1s">⭐</div>
+<div class="star" style="left:88%;animation-delay:3s">🩷</div>
+
 <div class="card">
-  <h1>🎉 Happy Birthday!</h1>
-  <p id="msg">Ada pesan kecil buat kamu 💌</p>
-  <button onclick="next()">Buka Pesan</button>
+  <h1>Happy Birthday 🎂</h1>
+  <div class="sub">klik satu-satu yaa 🤍</div>
+
+  <div class="grid">
+
+    <div class="item" onclick="openBox('Surat 💌',surat)">
+      <div class="emoji">💌</div>
+      <p>Surat</p>
+    </div>
+
+    <div class="item" onclick="openBox('Hadiah 🎁',hadiah)">
+      <div class="emoji">🎁</div>
+      <p>Hadiah</p>
+    </div>
+
+    <div class="item" onclick="openBox('Kue 🍰',kue)">
+      <div class="emoji">🍰</div>
+      <p>Kue</p>
+    </div>
+
+    <div class="item" onclick="openBox('Bintang ⭐',bintang)">
+      <div class="emoji">⭐</div>
+      <p>Fun Fact</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="popup">
+    <h2 id="title"></h2>
+    <p id="text"></p>
+    <button onclick="closeBox()">Tutup</button>
+  </div>
 </div>
 
 <script>
-const pesan=[
-"Selamat menginjak 24 tahun, Tia ✨",
-"Terima kasih sudah memilih jadi orang baik di antara dunia putih hitam ini 🤍",
-"Semoga tahun ini lebih banyak tawa daripada sedih",
-"Semoga di tahun ini dan tahun tahun ke depan, satu persatu impian dan mimpi kamu bisa terwujud 🫶"
-];
-let i=0;
-function next(){
- document.getElementById("msg").innerText=pesan[i];
- i=(i+1)%pesan.length;
+const surat=`Selamat ulang tahun yaa 🤍
+
+Selamat bertambah usia.
+Sekarang uda 24 taun, uda makin besar dan semoga semakin dewasa juga.
+Sebuah kehormatan dan bersyukur bisa kenal dan berteman dari kecil. U re the best, best friend ever. I love you.
+23 tahun kemaren anggap aja trial n error. Semakin hari, semakin banyak pelajaran yang bisa diambil dari keberhasilan dan kegagalan.
+24 dan tahun tahun selanjutnya semoga jadi media berkembang yang baik. Pribadi, karir, pasangan, kehidupan, dan semuanya.
+Semoga selalu dikelilingi orang-orang baik, kalopun harus bertemu dengan yang jahat, anggap itu pelajaran bahwa di dunia ini gasemua hitam dan putih aja, ada yang abu-abu.
+Sorry, tahun ini aku dabisa kasi apa apa:(`;
+
+const wishes=`Setiap langkah, rencana, harapan, usaha, dan niat kamu dilancarkan dan direstui semesta `;
+
+const kue=`Tiup lilinnya dulu ya 🎂
+
+Make a Wish, amen`;
+
+const bintang=`Fun fact ⭐
+
+Kalo ada pilihan di mana aku cuma boleh pilih satu teman, that person will be u whom i always choose 🫶
+Kenangan lucu: make up pocong di rumah kamu
+Kenangan bermakna: damai pertama kali setelah berantem pertama kali di SD
+Kenangan gadua kali: bicara dari hati ke hati pertama kali, setelah aku menjauh pas SMA
+Kenangan yang mau diulang selamanya: di satu kota, bisa ketemu kapan aja, bisa main kapan aja, gaselalu ketemu tapi selalu tau tempat pulang`;
+
+function openBox(judul,isi){
+ document.getElementById('modal').style.display='flex';
+ document.getElementById('title').innerText=judul;
+ document.getElementById('text').innerText=isi;
+}
+
+function closeBox(){
+ document.getElementById('modal').style.display='none';
 }
 </script>
 
