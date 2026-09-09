@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday My Best Friend Ever <3 🎂</title>
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffd6e7,#fff3c7);
+  font-family:Arial,sans-serif;
+}
+.card{
+  background:white;
+  width:330px;
+  padding:30px;
+  border-radius:24px;
+  text-align:center;
+  box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+button{
+  margin-top:18px;
+  border:none;
+  background:#ff6fa5;
+  color:white;
+  padding:12px 20px;
+  border-radius:999px;
+  cursor:pointer;
+}
+h1{color:#ff4d88}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>🎉 Happy Birthday!</h1>
+  <p id="msg">Ada pesan kecil buat kamu 💌</p>
+  <button onclick="next()">Buka Pesan</button>
+</div>
+
+<script>
+const pesan=[
+"Selamat menginjak 24 tahun, Tia ✨",
+"Terima kasih sudah memilih jadi orang baik di antara dunia putih hitam ini 🤍",
+"Semoga tahun ini lebih banyak tawa daripada sedih",
+"Semoga di tahun ini dan tahun tahun ke depan, satu persatu impian dan mimpi kamu bisa terwujud 🫶"
+];
+let i=0;
+function next(){
+ document.getElementById("msg").innerText=pesan[i];
+ i=(i+1)%pesan.length;
+}
+</script>
+
+</body>
+</html>
