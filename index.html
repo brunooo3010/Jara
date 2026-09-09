@@ -1,199 +1,1223 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Happy Birthday ✨</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(180deg,#FCE7F3,#FFF7ED);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
+    font-family:Arial, sans-serif;
+    min-height:100vh;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 20% 20%, #fff 0%, transparent 25%),
+        linear-gradient(135deg,#fce7f3,#fff7ed,#fdf2f8);
+    color:#475569;
+}
+
+
+/* =========================
+   OPENING PAGE
+========================= */
+
+#opening{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25px;
+    z-index:100;
+    background:
+        radial-gradient(circle at 30% 20%,#ffffff 0%,transparent 20%),
+        linear-gradient(135deg,#fbcfe8,#fef3c7);
+}
+
+.opening-box{
+    max-width:380px;
+    animation:fadeUp 1s ease;
+}
+
+.opening-small{
+    font-size:14px;
+    color:#9d7890;
+    margin-bottom:12px;
+}
+
+.opening-box h1{
+    font-size:38px;
+    color:#db2777;
+    margin-bottom:12px;
+}
+
+.opening-box p{
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.start-btn{
+    border:none;
+    background:#ec4899;
+    color:white;
+    padding:14px 28px;
+    border-radius:999px;
+    font-size:15px;
+    cursor:pointer;
+    box-shadow:0 8px 25px rgba(236,72,153,.3);
+    transition:.3s;
+}
+
+.start-btn:hover{
+    transform:scale(1.06);
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+#main{
+    display:none;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
 }
 
 .card{
-  width:360px;
-  background:rgba(255,255,255,.7);
-  backdrop-filter:blur(14px);
-  border-radius:28px;
-  padding:28px;
-  text-align:center;
-  box-shadow:0 10px 40px rgba(0,0,0,.12);
+    width:390px;
+    max-width:100%;
+    background:rgba(255,255,255,.78);
+    backdrop-filter:blur(18px);
+    border-radius:30px;
+    padding:30px;
+    text-align:center;
+    box-shadow:
+        0 20px 60px rgba(236,72,153,.15),
+        inset 0 0 0 1px rgba(255,255,255,.8);
+
+    animation:fadeUp .8s ease;
 }
 
-h1{
-  color:#ec4899;
-  font-size:30px;
+.card h1{
+    color:#db2777;
+    font-size:31px;
+    margin-bottom:6px;
 }
 
 .sub{
-  color:#64748b;
-  margin:8px 0 22px;
+    color:#94a3b8;
+    font-size:14px;
+    margin-bottom:24px;
 }
 
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress{
+    margin-bottom:20px;
+    font-size:12px;
+    color:#be6b91;
+}
+
+.progress-bar{
+    height:7px;
+    background:#fce7f3;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:7px;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:#f472b6;
+    transition:.5s;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
 .grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
 }
 
 .item{
-  background:white;
-  border-radius:18px;
-  padding:18px 10px;
-  cursor:pointer;
-  transition:.25s;
+    background:rgba(255,255,255,.95);
+    border-radius:20px;
+    padding:20px 10px;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+    border:1px solid #fce7f3;
 }
 
 .item:hover{
-  transform:translateY(-4px) scale(1.03);
+    transform:translateY(-6px) rotate(-1deg);
+    box-shadow:0 12px 25px rgba(236,72,153,.15);
 }
 
-.emoji{font-size:38px}
-.item p{margin-top:8px;font-size:14px}
+.emoji{
+    font-size:40px;
+}
+
+.item p{
+    margin-top:8px;
+    font-size:13px;
+    color:#64748b;
+}
+
+
+/* =========================
+   MODAL
+========================= */
 
 .modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.35);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+    position:fixed;
+    inset:0;
+    background:rgba(71,45,60,.35);
+    backdrop-filter:blur(6px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:50;
 }
 
 .popup{
-  background:white;
-  width:340px;
-  border-radius:24px;
-  padding:24px;
-  animation:pop .3s;
-}
-
-@keyframes pop{
-  from{transform:scale(.8);opacity:0}
-  to{transform:scale(1);opacity:1}
+    background:#fff;
+    width:370px;
+    max-width:100%;
+    max-height:80vh;
+    overflow:auto;
+    border-radius:28px;
+    padding:27px;
+    text-align:center;
+    animation:pop .35s ease;
+    box-shadow:0 20px 60px rgba(0,0,0,.18);
 }
 
 .popup h2{
-  color:#ec4899;
-  margin-bottom:12px;
+    color:#db2777;
+    margin-bottom:15px;
 }
 
 .popup p{
-  color:#475569;
-  line-height:1.8;
-  white-space:pre-line;
+    color:#475569;
+    line-height:1.85;
+    white-space:pre-line;
+    font-size:14px;
 }
 
-button{
-  margin-top:20px;
-  width:100%;
-  border:none;
-  background:#f472b6;
-  color:white;
-  padding:12px;
-  border-radius:999px;
-  cursor:pointer;
+.close-btn{
+    margin-top:20px;
+    width:100%;
+    border:none;
+    background:#f472b6;
+    color:white;
+    padding:13px;
+    border-radius:999px;
+    cursor:pointer;
 }
 
-.star{
-  position:absolute;
-  font-size:18px;
-  animation:float 6s linear infinite;
-  opacity:.7;
+
+/* =========================
+   SPECIAL BUTTON
+========================= */
+
+.next-btn{
+    margin-top:18px;
+    border:none;
+    background:#fce7f3;
+    color:#be185d;
+    padding:11px 20px;
+    border-radius:999px;
+    cursor:pointer;
 }
 
-@keyframes float{
-  from{transform:translateY(100vh)}
-  to{transform:translateY(-120px)}
+
+/* =========================
+   FLOATING DECORATIONS
+========================= */
+
+.float{
+    position:fixed;
+    pointer-events:none;
+    opacity:.7;
+    animation:floatUp linear infinite;
+    z-index:1;
 }
+
+@keyframes floatUp{
+    from{
+        transform:translateY(110vh) rotate(0deg);
+    }
+
+    to{
+        transform:translateY(-120px) rotate(360deg);
+    }
+}
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+.confetti{
+    position:fixed;
+    top:-20px;
+    width:9px;
+    height:15px;
+    z-index:200;
+    animation:confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall{
+    to{
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+        opacity:0;
+    }
+}
+
+
+/* =========================
+   CANDLE
+========================= */
+
+.cake{
+    font-size:80px;
+    margin:15px 0;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.cake:hover{
+    transform:scale(1.08);
+}
+
+.flame{
+    font-size:30px;
+    animation:flicker .5s infinite alternate;
+}
+
+@keyframes flicker{
+    from{
+        transform:scale(.9);
+    }
+    to{
+        transform:scale(1.1);
+    }
+}
+
+
+/* =========================
+   SECRET STAR
+========================= */
+
+.secret-star{
+    position:fixed;
+    font-size:25px;
+    cursor:pointer;
+    animation:pulse 1.5s infinite alternate;
+    z-index:10;
+}
+
+@keyframes pulse{
+    from{
+        transform:scale(.8);
+        opacity:.5;
+    }
+
+    to{
+        transform:scale(1.2);
+        opacity:1;
+    }
+}
+
+
+/* =========================
+   FINAL SCREEN
+========================= */
+
+#final{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25px;
+    background:
+        radial-gradient(circle at 50% 40%,#fff 0%,transparent 25%),
+        linear-gradient(135deg,#fbcfe8,#fef3c7);
+    z-index:150;
+}
+
+.final-box{
+    max-width:400px;
+    animation:fadeUp 1s ease;
+}
+
+.final-box h1{
+    font-size:35px;
+    color:#db2777;
+    margin-bottom:20px;
+}
+
+.final-box p{
+    line-height:1.9;
+    white-space:pre-line;
+}
+
+.restart{
+    margin-top:25px;
+    border:none;
+    padding:12px 24px;
+    border-radius:999px;
+    background:#ec4899;
+    color:white;
+    cursor:pointer;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes pop{
+    from{
+        transform:scale(.75);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:400px){
+
+    .card{
+        padding:22px;
+    }
+
+    .card h1{
+        font-size:27px;
+    }
+
+    .emoji{
+        font-size:34px;
+    }
+
+    .item{
+        padding:16px 8px;
+    }
+
+}
+
 </style>
 </head>
+
+
 <body>
 
-<div class="star" style="left:10%;animation-delay:0s">✨</div>
-<div class="star" style="left:30%;animation-delay:2s">🌸</div>
-<div class="star" style="left:70%;animation-delay:1s">⭐</div>
-<div class="star" style="left:88%;animation-delay:3s">🩷</div>
 
-<div class="card">
-  <h1>Happy Birthday 🎂</h1>
-  <div class="sub">klik satu-satu yaa 🤍</div>
+<!-- =====================================
+     FLOATING DECORATIONS
+===================================== -->
 
-  <div class="grid">
+<div class="float" style="left:8%;animation-duration:7s;">✨</div>
+<div class="float" style="left:25%;animation-duration:9s;">🌸</div>
+<div class="float" style="left:45%;animation-duration:6s;">💗</div>
+<div class="float" style="left:68%;animation-duration:8s;">⭐</div>
+<div class="float" style="left:88%;animation-duration:10s;">🩷</div>
 
-    <div class="item" onclick="openBox('Surat 💌',surat)">
-      <div class="emoji">💌</div>
-      <p>Surat</p>
+
+<!-- =====================================
+     OPENING
+===================================== -->
+
+<div id="opening">
+
+    <div class="opening-box">
+
+        <div class="opening-small">
+            a little something for you...
+        </div>
+
+        <h1>Hey, you 🤍</h1>
+
+        <p>
+            Aku punya sesuatu kecil buat kamu.
+            <br>
+            Tapi kamu harus buka sendiri.
+        </p>
+
+        <button class="start-btn" onclick="startWebsite()">
+            Buka hadiahnya 🎁
+        </button>
+
     </div>
 
-    <div class="item" onclick="openBox('Hadiah 🎁',hadiah)">
-      <div class="emoji">🎁</div>
-      <p>Hadiah</p>
-    </div>
-
-    <div class="item" onclick="openBox('Kue 🍰',kue)">
-      <div class="emoji">🍰</div>
-      <p>Kue</p>
-    </div>
-
-    <div class="item" onclick="openBox('Bintang ⭐',bintang)">
-      <div class="emoji">⭐</div>
-      <p>Fun Fact</p>
-    </div>
-
-  </div>
 </div>
 
-<div class="modal" id="modal">
-  <div class="popup">
-    <h2 id="title"></h2>
-    <p id="text"></p>
-    <button onclick="closeBox()">Tutup</button>
-  </div>
+
+<!-- =====================================
+     MAIN PAGE
+===================================== -->
+
+<div id="main">
+
+    <div class="card">
+
+        <h1>Happy Birthday 🎂</h1>
+
+        <div class="sub">
+            24 looks good on you 🤍
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress">
+
+            <span id="progressText">
+                0 / 5 ditemukan
+            </span>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    id="progressFill">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ITEMS -->
+
+        <div class="grid">
+
+
+            <!-- SURAT -->
+
+            <div
+                class="item"
+                onclick="openLetter()">
+
+                <div class="emoji">
+                    💌
+                </div>
+
+                <p>
+                    Surat
+                </p>
+
+            </div>
+
+
+            <!-- HADIAH -->
+
+            <div
+                class="item"
+                onclick="openGift()">
+
+                <div class="emoji">
+                    🎁
+                </div>
+
+                <p>
+                    Hadiah
+                </p>
+
+            </div>
+
+
+            <!-- CAKE -->
+
+            <div
+                class="item"
+                onclick="openCake()">
+
+                <div class="emoji">
+                    🎂
+                </div>
+
+                <p>
+                    Make a Wish
+                </p>
+
+            </div>
+
+
+            <!-- FUN FACT -->
+
+            <div
+                class="item"
+                onclick="openFunFact()">
+
+                <div class="emoji">
+                    ⭐
+                </div>
+
+                <p>
+                    Fun Fact
+                </p>
+
+            </div>
+
+
+            <!-- WISHES -->
+
+            <div
+                class="item"
+                onclick="openWishes()">
+
+                <div class="emoji">
+                    🌷
+                </div>
+
+                <p>
+                    Wishes
+                </p>
+
+            </div>
+
+
+            <!-- SECRET -->
+
+            <div
+                class="item"
+                onclick="secretHint()">
+
+                <div class="emoji">
+                    🔐
+                </div>
+
+                <p>
+                    Secret
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
+
+
+<!-- =====================================
+     MODAL
+===================================== -->
+
+<div
+    class="modal"
+    id="modal">
+
+    <div class="popup">
+
+        <h2 id="title"></h2>
+
+        <p id="text"></p>
+
+        <div id="extra"></div>
+
+        <button
+            class="close-btn"
+            onclick="closeBox()">
+
+            Tutup 🤍
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+     FINAL
+===================================== -->
+
+<div id="final">
+
+    <div class="final-box">
+
+        <h1>
+            One last thing... 🤍
+        </h1>
+
+        <p>
+            Semoga di umur 24 ini,
+            kamu menemukan lebih banyak alasan
+            untuk tersenyum.
+
+            Semoga semua hal yang sedang kamu perjuangkan
+            perlahan menemukan jalannya.
+
+            Dan kalau suatu hari nanti
+            hidup terasa terlalu berat...
+
+            remember,
+
+            you are loved.
+            you are important.
+            and you will always have a place
+            to come home to. 🫶
+
+            Happy 24th birthday.
+        </p>
+
+        <button
+            class="restart"
+            onclick="location.reload()">
+
+            Mulai lagi ✨
+
+        </button>
+
+    </div>
+
+</div>
+
+
 
 <script>
-const surat=`Selamat ulang tahun yaa 🤍
+
+/* =====================================
+   YOUR MESSAGES
+===================================== */
+
+
+/* SURAT */
+
+const surat = `Selamat ulang tahun yaa 🤍
 
 Selamat bertambah usia.
 Sekarang uda 24 taun, uda makin besar dan semoga semakin dewasa juga.
-Sebuah kehormatan dan bersyukur bisa kenal dan berteman dari kecil. U re the best, best friend ever. I love you.
-23 tahun kemaren anggap aja trial n error. Semakin hari, semakin banyak pelajaran yang bisa diambil dari keberhasilan dan kegagalan.
-24 dan tahun tahun selanjutnya semoga jadi media berkembang yang baik. Pribadi, karir, pasangan, kehidupan, dan semuanya.
-Semoga selalu dikelilingi orang-orang baik, kalopun harus bertemu dengan yang jahat, anggap itu pelajaran bahwa di dunia ini gasemua hitam dan putih aja, ada yang abu-abu.
-Sorry, tahun ini aku dabisa kasi apa apa:(`;
 
-const wishes=`Setiap langkah, rencana, harapan, usaha, dan niat kamu dilancarkan dan direstui semesta `;
+Sebuah kehormatan dan bersyukur bisa kenal dan berteman dari kecil.
 
-const kue=`Tiup lilinnya dulu ya 🎂
+U re the best, best friend ever.
+I love you.
 
-Make a Wish, amen`;
+23 tahun kemaren anggap aja trial n error.
 
-const bintang=`Fun fact ⭐
+Semakin hari, semakin banyak pelajaran yang bisa diambil dari keberhasilan dan kegagalan.
 
-Kalo ada pilihan di mana aku cuma boleh pilih satu teman, that person will be u whom i always choose 🫶
-Kenangan lucu: make up pocong di rumah kamu
-Kenangan bermakna: damai pertama kali setelah berantem pertama kali di SD
-Kenangan gadua kali: bicara dari hati ke hati pertama kali, setelah aku menjauh pas SMA
-Kenangan yang mau diulang selamanya: di satu kota, bisa ketemu kapan aja, bisa main kapan aja, gaselalu ketemu tapi selalu tau tempat pulang`;
+24 dan tahun tahun selanjutnya semoga jadi media berkembang yang baik.
 
-function openBox(judul,isi){
- document.getElementById('modal').style.display='flex';
- document.getElementById('title').innerText=judul;
- document.getElementById('text').innerText=isi;
+Pribadi, karir, pasangan, kehidupan, dan semuanya.
+
+Semoga selalu dikelilingi orang-orang baik.
+
+Kalopun harus bertemu dengan yang jahat, anggap itu pelajaran bahwa di dunia ini gasemua hitam dan putih aja.
+
+Ada yang abu-abu.
+
+Sorry, tahun ini aku gabisa kasi apa apa :(`;
+
+
+/* WISHES */
+
+const wishes = `Setiap langkah, rencana, harapan, usaha, dan niat kamu dilancarkan dan direstui semesta.
+
+Semoga apa pun yang sedang kamu perjuangkan sekarang menemukan jalan terbaiknya.
+
+Semoga kamu selalu punya alasan untuk bangun dengan semangat.
+
+Semoga karirnya bagus.
+
+Semoga kehidupannya lebih tenang.
+
+Semoga urusan pasangan juga dipertemukan dengan orang yang tepat.
+
+Dan semoga umur 24 menjadi awal dari banyak hal baik. ✨`;
+
+
+/* FUN FACT */
+
+const bintang = `Fun fact ⭐
+
+Kalo ada pilihan di mana aku cuma boleh pilih satu teman,
+
+that person will be u
+whom i always choose. 🫶
+
+Kenangan lucu:
+
+make up pocong di rumah kamu.
+
+Kenangan bermakna:
+
+damai pertama kali setelah berantem pertama kali di SD.
+
+Kenangan gadua kali:
+
+bicara dari hati ke hati pertama kali,
+setelah aku menjauh pas SMA.
+
+Kenangan yang mau diulang selamanya:
+
+di satu kota,
+bisa ketemu kapan aja,
+bisa main kapan aja.
+
+Gaselalu ketemu,
+tapi selalu tau tempat pulang.`;
+
+
+/* CAKE */
+
+const kue = `Tiup lilinnya dulu ya 🎂
+
+Make a Wish.
+
+Amen. 🤲✨`;
+
+
+/* =====================================
+   STATE
+===================================== */
+
+let found = 0;
+
+let secretFound = false;
+
+
+/* =====================================
+   START
+===================================== */
+
+function startWebsite(){
+
+    document.getElementById("opening").style.display = "none";
+
+    document.getElementById("main").style.display = "flex";
+
+    createSecretStar();
+
 }
+
+
+/* =====================================
+   MODAL
+===================================== */
+
+function openBox(title,text){
+
+    document.getElementById("modal").style.display = "flex";
+
+    document.getElementById("title").innerText = title;
+
+    document.getElementById("text").innerText = text;
+
+    document.getElementById("extra").innerHTML = "";
+
+}
+
+
+/* =====================================
+   CLOSE
+===================================== */
 
 function closeBox(){
- document.getElementById('modal').style.display='none';
+
+    document.getElementById("modal").style.display = "none";
+
 }
+
+
+/* =====================================
+   LETTER
+===================================== */
+
+function openLetter(){
+
+    openBox(
+        "Untuk kamu 💌",
+        surat
+    );
+
+    countFound();
+
+}
+
+
+/* =====================================
+   WISHES
+===================================== */
+
+function openWishes(){
+
+    openBox(
+        "A little prayer 🌷",
+        wishes
+    );
+
+    countFound();
+
+}
+
+
+/* =====================================
+   FUN FACT
+===================================== */
+
+function openFunFact(){
+
+    openBox(
+        "Our little history ⭐",
+        bintang
+    );
+
+    countFound();
+
+}
+
+
+/* =====================================
+   GIFT
+===================================== */
+
+function openGift(){
+
+    if(!secretFound){
+
+        openBox(
+            "Eits... 🎁",
+            `Hadiah ini belum boleh dibuka.
+
+Kayaknya masih ada sesuatu
+yang harus kamu cari dulu.
+
+Petunjuk:
+
+⭐
+
+Cari bintang yang agak mencurigakan
+di sekitar halaman ini.`
+        );
+
+        return;
+
+    }
+
+
+    openBox(
+        "Hadiah terbuka 🎁",
+        `Selamat!
+
+Kamu berhasil menemukan secret star.
+
+Hadiah sebenarnya...
+
+bukan sesuatu yang bisa dibungkus.
+
+Tapi satu tahun penuh
+yang semoga isinya
+lebih banyak bahagia
+daripada sedih.
+
+That's it.
+
+That's your gift. 🤍`
+    );
+
+    countFound();
+
+}
+
+
+/* =====================================
+   SECRET HINT
+===================================== */
+
+function secretHint(){
+
+    if(secretFound){
+
+        openBox(
+            "Secret unlocked 🔓",
+            `You already found it.
+
+Ternyata kamu lumayan jeli juga. 👀
+
+Sekarang coba buka hadiahnya. 🎁`
+        );
+
+        return;
+
+    }
+
+
+    openBox(
+        "Hmm... 🔐",
+        `Ada sesuatu yang tersembunyi.
+
+Katanya...
+
+orang yang ulang tahun
+harus mencari sendiri hadiahnya.
+
+Clue:
+
+⭐
+
+Good luck.`
+    );
+
+}
+
+
+/* =====================================
+   SECRET STAR
+===================================== */
+
+function createSecretStar(){
+
+    const star = document.createElement("div");
+
+    star.className = "secret-star";
+
+    star.innerText = "⭐";
+
+    star.style.left =
+        (Math.random()*80 + 10) + "%";
+
+    star.style.top =
+        (Math.random()*70 + 15) + "%";
+
+
+    star.onclick = function(){
+
+        secretFound = true;
+
+        star.remove();
+
+        openBox(
+            "YOU FOUND IT! ⭐",
+            `Okay...
+
+ternyata kamu nemu juga.
+
+Sekarang coba buka 🎁.
+
+Ada sesuatu yang nunggu di sana.`
+        );
+
+        updateProgress();
+
+    };
+
+
+    document.body.appendChild(star);
+
+}
+
+
+/* =====================================
+   PROGRESS
+===================================== */
+
+function countFound(){
+
+    if(found >= 4) return;
+
+    found++;
+
+    updateProgress();
+
+}
+
+
+function updateProgress(){
+
+    let amount = secretFound
+        ? 100
+        : (found / 5) * 100;
+
+    document.getElementById("progressFill").style.width =
+        amount + "%";
+
+
+    document.getElementById("progressText").innerText =
+        secretFound
+        ? "Secret ditemukan ⭐"
+        : found + " / 5 ditemukan";
+
+}
+
+
+/* =====================================
+   CAKE
+===================================== */
+
+function openCake(){
+
+    document.getElementById("modal").style.display = "flex";
+
+    document.getElementById("title").innerText =
+        "Make a Wish 🎂";
+
+    document.getElementById("text").innerText =
+        "Klik lilinnya untuk meniup.";
+
+    document.getElementById("extra").innerHTML = `
+
+        <div
+            class="cake"
+            onclick="blowCandle()">
+
+            <div class="flame">
+                🔥
+            </div>
+
+            🎂
+
+        </div>
+
+        <p>
+            klik apinya ✨
+        </p>
+
+    `;
+
+}
+
+
+/* =====================================
+   BLOW CANDLE
+===================================== */
+
+function blowCandle(){
+
+    document.getElementById("title").innerText =
+        "Make a Wish ✨";
+
+    document.getElementById("text").innerText =
+        kue;
+
+    document.getElementById("extra").innerHTML =
+        `<div style="font-size:60px;margin-top:15px">
+            🎉✨🎊
+        </div>`;
+
+    confetti();
+
+    found++;
+
+    updateProgress();
+
+}
+
+
+/* =====================================
+   CONFETTI
+===================================== */
+
+function confetti(){
+
+    for(let i=0;i<80;i++){
+
+        const piece =
+            document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.style.left =
+            Math.random()*100 + "vw";
+
+        piece.style.animationDuration =
+            (2 + Math.random()*2) + "s";
+
+        piece.style.transform =
+            `rotate(${Math.random()*360}deg)`;
+
+        document.body.appendChild(piece);
+
+        setTimeout(()=>{
+            piece.remove();
+        },4000);
+
+    }
+
+}
+
+
+/* =====================================
+   CLOSE MODAL + CHECK END
+===================================== */
+
+const originalClose = closeBox;
+
+closeBox = function(){
+
+    document.getElementById("modal").style.display = "none";
+
+    if(secretFound && found >= 5){
+
+        setTimeout(()=>{
+
+            document.getElementById("final").style.display =
+                "flex";
+
+            confetti();
+
+        },500);
+
+    }
+
+};
+
+
 </script>
 
 </body>
 </html>
+```
